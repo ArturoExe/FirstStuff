@@ -83,7 +83,7 @@ namespace Programa17_InterfazVolumenes
            }
             public double CalcularVolumen() 
             {
-                return (1 / 3) * Math.PI * Math.Pow(Radi, 2) * Altur;
+                return (1 / 3f) * Math.PI * Math.Pow(Radi, 2) * Altur;
             }
             public void DesplegarVolumen()
             {
