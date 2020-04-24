@@ -1,0 +1,161 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Programa16_AbstractaVolumenes
+{
+    class Program
+    {public abstract class Figuras 
+     {//Campos de la superclase
+            public int Lado;
+            public float Radio, Altura;
+            public double Volumen;
+     //Metodos abstractos  de la superclase
+            abstract public double CalcularVol();
+            abstract public void DesplegarVol();
+            //Destructor de superclase figuras
+            ~Figuras() { Console.Write("MEMORIA OBJETO CLASE BASE FIGURAS LIBERADA"+"\r\n"); }
+        }
+       //Clase derivada Esfera
+        public class Esfera : Figuras
+        //Constructor de clase derivada esfera
+        { public Esfera(float Radio) 
+            {
+                this.Radio = Radio;
+                this.Lado = 0;
+                this.Altura = 0;
+            }
+        //Metodos override para esfera
+            public override double CalcularVol()
+            {
+                return this.Volumen = (4 / 3) * Math.PI * Math.Pow(Radio, 3);  
+            }
+            public override void DesplegarVol()
+            {
+                Console.WriteLine("El radio de la esfera es: "+Radio);
+                Console.WriteLine("El volumen de la esfera es: "+Volumen);
+            }
+            //Destructor de clase derivada esfera
+            ~Esfera() { Console.WriteLine("MEMORIA DEL OBJETO CLASE DERIVADA ESFERA LIBERADA"); }
+        }
+        //Clase derivada cubo
+        public class Cubo : Figuras 
+        {
+         //Constructor de clase cubo
+            public Cubo(int Lado)
+            {
+                this.Lado = Lado;
+            }
+         //Metodos override para clase cubo
+            public override double CalcularVol()
+            {
+                return this.Volumen = Math.Pow(Lado, 3);
+            }
+            public override void DesplegarVol()
+            {
+                Console.WriteLine("El valor del lado del cubo es: "+Lado);
+                Console.WriteLine("El volumen del cubo es: "+Volumen);
+            }
+            //Destructor de clase derivada cubo
+            ~Cubo() { Console.WriteLine("MEMORIA DEL OBJETO CLASE DERIVADA CUBO LIBERADA"); }
+        }
+       //Clase derivada cilindro
+        public class Cilindro : Figuras
+        {//Contructor de Clase cilindro
+            public Cilindro(float Radio, float Altura)
+            {
+                this.Radio = Radio;
+                this.Altura= Altura;
+
+            }
+         //Metodos override 
+            public override double CalcularVol()
+            {
+                return this.Volumen = Math.PI * Math.Pow(Radio, 2) * Altura;
+            }
+            public override void DesplegarVol()
+            {
+                Console.WriteLine("El valor del radio de Cilindro es: " + Radio);
+                Console.WriteLine("El valor de la altura del cilindro es: " + Altura);
+                Console.WriteLine("El volumen del Cilindro es: " + Volumen);
+
+            }
+            //Destructor de clase derivada cilindro
+            ~Cilindro() { Console.WriteLine("MEMORIA DEL OBJETO CLASE DERIVADA CILINDRO LIBERADA"); }
+        }
+        //Clase derivada Cono
+        public class Cono : Figuras
+        {//Constructor de clase derivada cono
+            public Cono(float Radio, float Altura)
+            {
+                this.Radio = Radio;
+                this.Altura = Altura;
+            }
+            //Metodos overrite
+            public override double CalcularVol()
+            {
+                return this.Volumen = (1 / 3) * Math.PI * Math.Pow(Radio, 2) * Altura;
+            }
+            public override void DesplegarVol()
+            {
+                Console.WriteLine("El valor del radio del cono es: " + Radio);
+                Console.WriteLine("El valor de la altura es: " + Altura);
+                Console.WriteLine("El volumen del cono es: " + Volumen);
+            }
+            //Destructor de clase derivada cono
+            ~Cono() { Console.WriteLine("MEMORIA DEL OBJETO CLASE DERIVADA CONO LIBERADA"); }
+        }
+
+        static void Main(string[] args)
+        {//Variables auxiliares 
+            int lado;
+            float radio, altura;
+            double Vol;
+            //Capturar valores segun la figura
+            //Esfera
+            Console.WriteLine("Esfera");
+            Console.Write("Introduzca el radio de la esfera: ");
+            radio = System.Single.Parse(Console.ReadLine());
+            Esfera esfera = new Esfera(radio);
+            esfera.CalcularVol();
+            esfera.DesplegarVol();
+            Console.Write("\r\n");
+
+
+            //Cubo
+            Console.WriteLine("Cubo");
+            Console.Write("Intruduzca el valor del lado del cubo: " );
+            lado = System.Int32.Parse(Console.ReadLine());
+            Cubo cubo = new Cubo(lado);
+            cubo.CalcularVol();
+            cubo.DesplegarVol();
+            Console.Write("\r\n");
+
+
+            //Cilindro
+            Console.WriteLine("Cilindro");
+            Console.Write("Introduzca el radio del cilindro: ");
+            radio = System.Single.Parse(Console.ReadLine());
+            Console.Write("Introduzca la altura del cilindro: ");
+            altura = System.Single.Parse(Console.ReadLine());
+            Cilindro cilindro = new Cilindro(radio, altura);
+            cilindro.CalcularVol();
+            cilindro.DesplegarVol();
+            Console.Write("\r\n");
+
+            //Cono
+            Console.WriteLine("Cono");
+            Console.Write("Introduzca el radio del cono: ");
+            radio = System.Single.Parse(Console.ReadLine());
+            Console.Write("Introduzca la altura del cono: ");
+            altura = System.Single.Parse(Console.ReadLine());
+            Cono cono = new Cono(radio, altura);
+            cono.CalcularVol();
+            cono.DesplegarVol();
+
+
+        }
+    }
+}
