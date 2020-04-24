@@ -1,0 +1,146 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Programa17_InterfazVolumenes
+{
+    class Program
+    {public interface IFiguras
+        {
+
+            double CalcularVolumen();
+            void DesplegarVolumen();
+            
+        }
+        public class Esfera : IFiguras 
+        {
+            public float radio;
+            public Esfera(float  radio) 
+            {
+                this.radio = radio;
+            }
+            public double CalcularVolumen()
+            {
+                return (4 / 3) * Math.PI * Math.Pow(radio, 3);
+            }
+            public void DesplegarVolumen()
+            {
+                Console.WriteLine("El radio de la esfera es: "+radio);
+                Console.WriteLine("El volumen de la esfera es: "+CalcularVolumen());
+            }
+            ~Esfera() { Console.WriteLine("MEMORIA LIBERADA DEL OBJETO ESFERA"); }
+        }
+        public class Cubo : IFiguras
+        {
+            public float Lado;
+            public Cubo(float Lado) 
+            {
+                this.Lado=Lado;
+            }
+            public double CalcularVolumen() 
+            {
+                return Math.Pow(Lado, 3);
+
+            }
+            public void DesplegarVolumen() 
+            {
+                Console.WriteLine("El valor de los lados es: "+Lado);
+                Console.WriteLine("El Volumen del cubo es: "+CalcularVolumen());
+            }
+            ~Cubo() { Console.WriteLine("MEMORIA LIBERADA DEL OBJETO CUBO"); }
+        }
+        public class Cilindro : IFiguras
+        {
+            public float Altura, Radio;
+            public Cilindro(float Altura,float Radio)
+            {
+                this.Altura = Altura;
+                this.Radio = Radio;
+
+            }
+            public double CalcularVolumen() 
+            {
+                return Math.PI * Math.Pow(Radio, 2) * Altura;
+            }
+            public void DesplegarVolumen() 
+            {
+                Console.WriteLine("El valor del radio: "+Radio);
+                Console.WriteLine("El valor del la altura: "+Altura);
+                Console.WriteLine("El Volumen del Cilindro es: "+CalcularVolumen());
+            }
+            ~Cilindro() { Console.WriteLine("MEMORIA LIBERADA DEL OBJETO CILINDRO"); }
+        }
+        public class Cono : IFiguras
+        {
+            public float Altur, Radi;
+           public Cono(float Altur, float Radi)
+           {
+                this.Altur = Altur;
+                this.Radi = Radi;
+
+           }
+            public double CalcularVolumen() 
+            {
+                return (1 / 3) * Math.PI * Math.Pow(Radi, 2) * Altur;
+            }
+            public void DesplegarVolumen()
+            {
+                Console.WriteLine("El valor del radio: "+Radi);
+                Console.WriteLine("El valor del la altura: "+Altur);
+                Console.WriteLine("El Volumen del Cono es: " + CalcularVolumen());
+            }
+            ~Cono() 
+            {
+                Console.WriteLine("MEMORIA LIBERADA DEL OBJETO CONO");
+            }
+
+        }
+
+        static void Main(string[] args)
+        {
+            float Alt, Rad, Lad;
+            Console.WriteLine("------------------------------Esfera------------------------------ ");
+            Console.WriteLine("Introduzca el radio para calcular volumen: ");
+            Rad = System.Single.Parse(Console.ReadLine());
+            Esfera esfera = new Esfera(Rad);
+
+            Console.WriteLine("------------------------------Cubo------------------------------ ");
+            Console.WriteLine("Introduzca el Valor del lado para calcular volumen: ");
+            Lad = System.Single.Parse(Console.ReadLine());
+            Cubo cubo = new Cubo(Lad);
+
+            Console.WriteLine("------------------------------Cilindro------------------------------ ");
+            Console.WriteLine("Introduzca el radio del cilindro para calcular volumen: ");
+            Rad = System.Single.Parse(Console.ReadLine());
+            Console.WriteLine("Introduzca la Altura del cilindro para calcular volumen: ");
+            Alt = System.Single.Parse(Console.ReadLine());
+            Cilindro cilindro = new Cilindro(Alt, Rad);
+
+            Console.WriteLine("------------------------------Cono------------------------------ ");
+            Console.WriteLine("Introduzca el radio del Cono para calcular volumen: ");
+            Rad = System.Single.Parse(Console.ReadLine());
+            Console.WriteLine("Introduzca la Altura del Cono para calcular volumen: ");
+            Alt = System.Single.Parse(Console.ReadLine());
+            Cono cono = new Cono(Alt, Rad);
+
+            esfera.CalcularVolumen();
+            esfera.DesplegarVolumen();
+
+            cubo.CalcularVolumen();
+            cubo.DesplegarVolumen();
+
+            cilindro.CalcularVolumen();
+            cilindro.DesplegarVolumen();
+         
+         //El calculo de cono da cero por algun motivo
+            cono.CalcularVolumen();
+            cono.DesplegarVolumen();
+
+
+
+           
+        }
+    }
+}
