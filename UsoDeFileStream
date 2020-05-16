@@ -1,0 +1,86 @@
+namespace Programa26_ArchivoTextoBytes
+{
+    class Program
+    {
+
+       
+        static void Main(string[] args)
+        {
+            string Menu,Nombre;
+            int nbytes = 0,car,salir=1;
+            byte[] bBuffer = new byte[81];
+            char[] cBuffer = new char[81];
+            do
+            {
+
+                //MENU PARA CREAR,LEER EL ARCHIVO
+                Console.Write("MENU Archivo de Texto con flujos de Bytes\n-------------------------------------\na)Crear el archivo\nb)Leer el archivo\nc)Salir del programa\n-------------------------------------\nOpcion seleccionada:");
+                 Menu = Console.ReadLine();
+                 Menu.ToLower();
+            
+           
+                if (Menu == "a")
+                {
+                    Menu = "n";
+                    try
+                    {
+                        Console.Write("Escriba el nombre del archivo: ");
+                        Nombre = Console.ReadLine();
+                        FileStream fileC = new FileStream("./" + Nombre + ".txt", FileMode.Create, FileAccess.Write);
+                        Console.WriteLine("Escriba el contenido del archivo y al finalizar presione <ENTER>");
+                        while ((car = Console.Read()) != '\r' && (nbytes < bBuffer.Length))
+                        {
+                            bBuffer[nbytes] = (byte)car;
+                            nbytes++;
+                        }
+                        fileC.Write(bBuffer, 0, nbytes);
+                        fileC.Close();
+                    }
+                    catch (IOException es)
+                    {
+                        Console.WriteLine("Mensaje del Error: " + es.Message);
+                        Console.WriteLine("Ruta del Error: " + es.StackTrace);
+
+                    }
+                  
+                }
+                else if (Menu == "b")
+                {
+
+                    try
+                    {
+                        Console.Write("Introduzca el nombre del archivo que quiere leer: ");
+                        Nombre = Console.ReadLine();
+                        FileStream fileR = new FileStream("./" + Nombre + ".txt", FileMode.Open, FileAccess.Read);
+                        nbytes = fileR.Read(bBuffer, 0, 81);
+
+                        Array.Copy(bBuffer, cBuffer, bBuffer.Length);
+                        string str = new string(cBuffer, 0, nbytes);
+
+                        // Muestra el texto leído
+                        Console.WriteLine("\nCONTENIDO DEL ARCHIVO");
+                        Console.WriteLine(str);
+                        Console.ReadKey();
+
+
+
+                    }
+                    catch (IOException le)
+                    {
+                        Console.WriteLine("Mensaje del Error: " + le.Message);
+                        Console.WriteLine("Ruta del Error: " + le.StackTrace);
+                    }
+                    Menu = "n";
+                 
+                }
+                else if (Menu == "c")
+                {
+                    salir = 0;
+                }
+
+                Console.Clear();
+            } while (salir==1);
+            
+        }
+    }
+}
