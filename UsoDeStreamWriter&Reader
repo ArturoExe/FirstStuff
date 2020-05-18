@@ -1,0 +1,115 @@
+namespace Programa27_ArchivoTextoCaracteres
+{
+    class Program
+    {public class TextoCaracteres 
+        {//campos de la clase
+            StreamWriter sw = null; //declaracion flujo de escritura
+            String str;
+            public void CrearArchivo(string Nombre) 
+            {
+                try
+                {//crea el flujo de escritura hacia el archivo.txt,si el archivo existye sobreescribe su contenido
+                    sw = new StreamWriter(Nombre+".txt");
+                    Console.WriteLine("Escriba las lineas de texto para almacena en el archivo.\n" + "Finalice cada linea pulsando la tecla <ENTER>.\n" + "Para finalizar la escritura pulse solo la tecla <ENTER>.\n");
+                    //lee una linea de la entrada estandar
+                    str = Console.ReadLine();
+                    //Mientras que la cadena str no este vacia escribe en el archivo
+                    while (str.Length != 0)
+                    {//Escribe la linea leida en el archivo
+                        sw.WriteLine(str);
+                        //lee la linea siguiente de la entrada estandar
+                        str = Console.ReadLine();
+
+                    }
+                    Console.WriteLine("El archivo fue creado de manera existosa,presione <ENTER> para regresar al menu");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                catch (IOException es)
+                {
+                    Console.WriteLine("Mensaje del Error: " + es.Message);
+                    Console.WriteLine("Ruta del Error: " + es.StackTrace);
+
+                }
+                finally 
+                {
+                    //cierra el flujo
+                    if (sw != null) sw.Close();
+
+                }
+            }
+
+            //campos de la clase
+            StreamReader sr = null;//Declaracion del flujo de lectura
+            //Metodo
+            public void LeerArchivo(string Nombre)
+            {
+                try
+                {//crear flujo de lectura desde el archivo
+                    sr = new StreamReader(Nombre + ".txt");
+                    //lee del archivo una linea de texto
+                    str = sr.ReadLine();
+                    //minetras la cadena str  no este vacia lee el archivo
+                    while (str != null)
+                    {
+                        //Muestra la linea leida y lee la siguiente del archivo
+                        Console.WriteLine(str);
+                        str = sr.ReadLine();
+                    }
+                    Console.WriteLine("El archivo fue leído de manera existosa,presione <ENTER> para regresar al menu");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                catch (IOException le)
+                {
+                    Console.WriteLine("Mensaje del Error: " + le.Message);
+                    Console.WriteLine("Ruta del Error: " + le.StackTrace);
+
+                }
+                finally
+                { // Cierra el flujo
+                    if (sr != null) sr.Close();
+                }
+            }
+        }
+
+       
+        static void Main(string[] args)
+        { string Menu="",Nomb="";
+            do 
+            {
+                Console.Write("MENU  Archivo de Texto con Flujos de Caracteres \n------------------------------------------------------------------------------\na) Crear el Archivo.\nb) Leer el Archivo.\nc) Salir del Programa.\nOpcion Seleccionada: ");
+                Menu= Console.ReadLine();
+                Menu.ToLower();
+                if (Menu == "a")
+                {//Crear Archivo
+                    Console.WriteLine("Creando archivo....");
+                    Console.WriteLine("Ingrese el nombre del archivo");
+                    Nomb = Console.ReadLine();
+                    TextoCaracteres texto = new TextoCaracteres();
+                    texto.CrearArchivo(Nomb);
+
+                }
+                else 
+                if(Menu=="b")
+                { //leer archivo
+                    Console.WriteLine("leeyendo archivo....");
+                    Console.WriteLine("Ingrese el nombre del archivo");
+                    Nomb = Console.ReadLine();
+                    Console.Clear();
+                    TextoCaracteres texto = new TextoCaracteres();
+                    texto.LeerArchivo(Nomb);
+                    
+                }
+                if (Menu != "a" && Menu != "b" && Menu != "c") //Seleccion de opcion fuera del menu
+                {
+                    Console.WriteLine("Por favor ingrese una opcion que se encuentre en el menu...<ENTER> para continuar");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+
+
+            } while (Menu!="c");
+        }
+    }
+}
